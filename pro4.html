@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <script>
+            var r = 255,
+    g = 125,
+    b = 50;
+let timpScurs;
+var onMouse;
+window.onload = start;
+function start() {
+    var new_div = document.createElement("div");
+    new_div.setAttribute("class", "div");
+    new_div.setAttribute("onmouseover", "mouseStatus(true);");
+    new_div.setAttribute("onmouseout", "mouseStatus(false);");
+    var my_div = document.getElementById("my_div");
+    my_div.appendChild(new_div);
+    timpScurs = setInterval(function () {
+        defCulori(),
+        clearTimeout(timpScurs);
+    }, 1000);
+}
+function transHexa(c) {
+    var hex = c.toString(16);
+    return hex.length == 1
+        ? "0" + hex
+        : hex;
+}
+
+function colorCode(r, g, b) {
+    return "#" + transHexa(r) + transHexa(g) + transHexa(b);
+}
+
+function defCulori() {
+    b = b + 25;
+    if (b > 255) {
+        b = 0;
+        g = g + 25;
+    }
+    if (g > 255) {
+        g = 0;
+        r = r + 25;
+    }
+
+    if (r > 255) {
+        r = 0;
+    }
+    let color = colorCode(r, g, b);
+    var div = document.getElementsByClassName("div");
+    if (!onMouse) 
+        div[0].style.backgroundColor = color;
+    let ck = new Date();
+    div[0].innerHTML = ck.getHours() + ':' + ck.getMinutes() + ':' + ck.getSeconds();
+    console.log(color);
+
+    timpScurs = setTimeout(() => {
+        defCulori();
+    }, 500);
+
+}
+        </script>
+        <style>
+         
+                .div {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            border: 5px solid black;
+	        margin: 10px;
+            background-color: rgb(255, 4, 4);
+            margin-top: 25em;
+            margin-left: 45%;
+}
+        </style>
+        <title>Actualizarea unei componente de tip div</title>
+    </head>
+    <body>
+        <div id="my_div"></div>
+    </body>
+</html>

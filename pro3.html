@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Setarea unei parole</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://helios.utcluj.ro/cosmin/WEB/CSS/style.css">
+
+<script>
+    var secParola = 0;
+    var chkMajuscule = false;
+    var chkCifre = false;
+    var chkCaracS = false;
+    var chkLungime = false;
+    function checkStrg() {
+      chkMajuscule = false;
+      chkCifre = false;
+      chkCaracS = false;
+      chkLungime = false;
+    
+      secParola = 0;
+      var pwd = document.getElementById('pass');
+      
+      if(new RegExp('(?=.*[A-Z])').test(pwd.value)) {
+        chkMajuscule = true;
+      }
+        else chkMajuscule = false;
+        if(new RegExp('.*[0-9].*').test(pwd.value)) {
+        chkCifre = true;
+      } 
+        else chkCifre = false;
+        if(new RegExp('[!@#$%^&*(,<>)?/]').test(pwd.value)) {
+        chkCaracS = true;
+      } 
+        else chkCaracS = false;
+        if(pwd.value.length > 5) {
+        chkLungime = true;
+      }
+        else chkLungime = false;
+      
+      if(chkLungime) {
+        secParola++;
+        if(chkMajuscule) secParola++;
+        if(chkCifre) secParola++;
+        if(chkCaracS) secParola++;
+      }
+      setareElemDv();
+    }
+    
+    function setareElemDv() {
+      var elem = document.getElementsByClassName('strDiv')[0];
+      var incDiv = document.getElementsByClassName('strSize')[0];
+      console.log(elem.style);
+      if(!chkLungime) {
+        elem.style.visibility = 'visible';
+        elem.style.backgroundColor = 'rgb(255,0,0)';
+        document.getElementById('howStrong').innerHTML = 'Parola insificient de sigura!';
+      }
+      if(secParola >= 1) {
+        elem.style.width = '60px';
+        elem.style.height = '30px';
+        elem.style.backgroundColor = 'rgb(255,128,0)';
+        incDiv.style.backgroundColor = 'rgb(255, 128, 0)';
+        incDiv.style.width = '60px';
+        incDiv.style.height = '60px';
+        document.getElementById('howStrong').innerHTML = 'Parola nesigura!';
+      }else{
+        elem.style.width = '30px';
+        elem.style.height = '30px';
+    
+        elem.style.backgroundColor = 'rgb(255,0,0)';
+        incDiv.style.backgroundColor = 'rgb(255, 0, 0)';
+        incDiv.style.width = '30px';
+        incDiv.style.height = '30px';
+      }
+      if(secParola >= 2) {
+        elem.style.width = '90px';
+        elem.style.height = '30px';
+    
+        elem.style.backgroundColor = 'rgb(255, 234, 0)';
+        incDiv.style.backgroundColor = 'rgb(255, 234, 0)';
+        incDiv.style.width = '90px';
+        incDiv.style.height = '90px';
+        document.getElementById('howStrong').innerHTML = 'Parola cu nivel de securitate mediu';
+      }
+      if(secParola >= 3) {
+        elem.style.width = '120px';
+        elem.style.height = '30px';
+    
+        elem.style.backgroundColor = 'rgb(255,255,128)';
+        incDiv.style.backgroundColor = 'rgb(255, 255, 128)';
+        incDiv.style.width = '120px';
+        incDiv.style.height = '120px';
+        document.getElementById('howStrong').innerHTML = 'Parola cu nivel de securitate bun';
+    
+      }
+      if(secParola >= 4) {
+        elem.style.width = '150px';
+        elem.style.height = '30px';
+    
+        elem.style.backgroundColor = 'rgb(0,240,0)';
+        document.getElementById('howStrong').innerHTML = 'Parola cu nivel de securitate ridicat';
+        incDiv.style.backgroundColor = 'rgb(0, 240, 0)';
+        incDiv.style.width = '150px';
+        incDiv.style.height = '150px';
+      }
+    }
+    
+    function gradParola() {
+      if(secParola != 4) {
+        alert('Parola cu nivel de securitate scazut');
+        window.location.reload();
+      }
+      else {
+        alert('Parola cu nivel de securitate ridicat');
+      }
+    }
+    </script>
+</head>
+<body>
+
+	Introduceti o parola pana cand aceasta o sa fie valida (culoare verde) <br>
+	Componenta parolei <br>
+  Minim:<br>
+  - un caracter special <br> 
+    - minim 6 caractere<br>
+	- o litera mare <br>
+    - o cifra 
+    
+	<form name='passwordTest'>
+		<input type='password' name='pass' id='pass' onkeyup='checkStrg()'>
+		<input type='submit' name='submit' value='Submit' onclick='gradParola()'>
+	</form>
+	<br>
+	
+	Puterea parolei: 
+	<div class='strMeter'> 
+      <div class='strDiv'></div>
+	</div>
+	<br><br><br>
+	<div class='strSize'></div>
+	<p id='howStrong'></p>
+	
+</body>
+</html>

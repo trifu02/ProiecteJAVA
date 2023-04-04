@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Formular Electronic</title>
+
+
+
+<link rel="stylesheet" href="http://helios.utcluj.ro/cosmin/WEB/CSS/style.css">
+
+<script>
+function afisINter(inputtxt)
+{
+    
+    var nr_tel = /^\d{10}$/;
+    if(inputtxt.value.match(nr_tel))
+     {
+      return true;
+        }
+      else
+        {
+        alert("Numarul de telefon introdus nu corespunde normleor structurale.");
+        return false;
+        }    
+ }
+var varstaMinima = 18;
+function aflaVarsta() {
+            var date = new Date(document.getElementById("date").value);
+            var today = new Date();
+
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var age1 = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
+            return age1;
+        }
+       
+function chkVarsta() {
+        var age = aflaVarsta();
+            if (age < varstaMinima) {
+                alert("Trebuiue sa aveti varsta de minim optaspreze (18) ani");
+            } 
+        }
+</script>
+
+</head>
+    
+<body>
+    
+<h2>Formular electronic</h2>
+    
+<form name="form1" onsubmit="afisINter()">
+
+    Nume: <input type = "text" name = "nume" id = "nume" required/><br>   
+    Prenume: <input type = "text" name = "prenume" id = "prenume" required/><br>
+    Sex: <input type = "radio" name = "sex" value = "Barbat" required>Masculin
+         <input type = "radio" name = "sex" value = "Femeie" >Feminin
+         <input type = "radio" name = "sex" value = "Femeie" >Altul<br>
+    Data nasterii: <input type = "date" name = "date" id = "date" required/><br>
+    Adresa de email: <input type = "email" name = "email" id = "email"  required/><br>
+    Numar de telefon: <input type ="text" name = "nr_tel" id="nr_tel"required><br>
+    Cunostinte de programare: <input type = "checkbox" id= "C++" name="cunostinte"/>C++ 
+    <input type = "checkbox" id= "C#" name="cunostinte"/>C#
+    <input type = "checkbox" id= "Java" name="cunostinte"/>Java
+    <input type = "checkbox" id= "Python" name="cunostinte"/>Python
+    <div style="visibility:hidden; color:red; display: inline-block;" id="chk_option_error">
+        Alegeti cel putin o optiune.</div><br> 
+    Observatii: <input type = "textarea" id="textarea" name="textarea"required><br>
+    <input type= "submit" value="OK" onclick="f1(document.form1.chkVarsta); chkVarsta()">
+</form>
+
+    
+</body>
+</html>

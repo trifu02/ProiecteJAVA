@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Redarea unei date</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="http://helios.utcluj.ro/cosmin/WEB/CSS/style.css">
+
+<script>
+
+function afisareINter(){
+    var text1 = "";
+    var predef2 = "";
+	var date1 = new Date(document.getElementById("date1").value);
+    var date2 = new Date(document.getElementById("date2").value);
+
+    predef1 += "Diferenta mai mare de trei luni";
+    predef2 += "Diferenta mai mica de trei luni";
+    if ((Math.round((date2.getTime() - date1.getTime()) / 1000 / 60 / 60 / 24) > 90) || (Math.round((date1.getTime() - date2.getTime()) / 1000 / 60 / 60 / 24) > 90))
+	    alert(predef1);
+    else alert(predef2);
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+<h2>Diferenta dintre cele doua date calendaristice</h2>
+
+<form name="form1" onsubmit="afisINter()">
+  <input type="date" name="date1" id="date1">
+  <input type="date" name="date2" id="date2">
+  <input type="submit" value="OK">
+</form>
+
+
+</body>
+</html>
